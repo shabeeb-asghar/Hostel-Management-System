@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'MyFont';
-    src: local("E:\Univerity Items\Semester 4\SDA\Project\Hostel_Managment_System\Fonts\brandon-text-medium\HVDFonts-BrandonText-Bold.otf");
-}
-
 #Text_Unlock {
     /* -fx-font-family: "Helvetica"; */
     -fx-font-size: 40px;
