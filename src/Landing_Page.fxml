@@ -25,10 +25,7 @@
                   <Rectangle fill="#232323" height="425.0" opacity="0.87" stroke="TRANSPARENT" strokeType="INSIDE" width="318.0" />
                   <Pane>
                      <children>
-                        <Text fx:id="Text_Unlock" text="Unlock">
-                           <font>
-                              <Font name="System Bold" size="30.0" />
-                           </font></Text>
+                        <Text fx:id="Text_Unlock" text="Unlock"></Text>
                         <Text fx:id="Text_Your" text="your">
                         </Text>
                         <Text fx:id="Text_Space" text="Space">

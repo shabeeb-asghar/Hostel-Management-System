@@ -1,5 +1,5 @@
 #Text_Unlock {
-    /* -fx-font-family: "Helvetica"; */
+    -fx-font-family: "Brandon Text Bold";
     -fx-font-size: 40px;
     -fx-fill: "#ffffff";
     -fx-translate-x: 40px;
@@ -8,7 +8,7 @@
 }
 
 #Text_Your {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Brandon Text Regular";
 
     -fx-font-size: 20px;
     -fx-fill: "#ffffff";
@@ -16,7 +16,7 @@
     -fx-translate-y: 175px;
 }
 #Text_Space {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Brandon Text Regular";
 
     -fx-font-size: 30px;
     -fx-fill: "#ffffff";
@@ -24,7 +24,7 @@
     -fx-translate-y: 175px;
 }
 #Text_Description_Hostel {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Brandon Text Regular";
 
     -fx-font-size: 8px;
     -fx-fill: "#f2eaea";
@@ -34,6 +34,7 @@
 
 #Button_Hostel
 {
+    -fx-font-family: "Brandon Text Regular";
     -fx-translate-x: 40px;
     -fx-translate-y: 285px;
     -fx-text-fill : "white";
@@ -44,7 +45,7 @@
 }
 
 #Text_Discover {
-    /* -fx-font-family: "Helvetica"; */
+    -fx-font-family: "Brandon Text Bold";
     -fx-font-size: 40px;
     -fx-fill: "#232323";
     -fx-translate-x: 40px;
@@ -53,7 +54,7 @@
 }
 
 #Text_Your_2 {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Brandon Text Regular";
 
     -fx-font-size: 20px;
     -fx-fill: "#232323";
@@ -61,7 +62,7 @@
     -fx-translate-y: 175px;
 }
 #Text_Stay {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Brandon Text Regular";
 
     -fx-font-size: 30px;
     -fx-fill: "#232323";
@@ -69,7 +70,7 @@
     -fx-translate-y: 175px;
 }
 #Text_Description_Guest {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Brandon Text Regular";
 
     -fx-font-size: 8px;
     -fx-fill: "#383434";
@@ -79,6 +80,8 @@
 
 #Button_Guest
 {
+    -fx-font-family: "Brandon Text Regular";
+
     -fx-translate-x: 40px;
     -fx-translate-y: 285px;
     -fx-text-fill : "#232323";
