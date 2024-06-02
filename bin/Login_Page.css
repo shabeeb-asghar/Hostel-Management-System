@@ -19,6 +19,8 @@
     -fx-background-color: none; 
     -fx-border-color: white;
     -fx-text-fill: white;
+    -fx-border-radius: 5px;
+
 }
 
 #Email_Text_Field , #Password_TextField, #Login_Button
