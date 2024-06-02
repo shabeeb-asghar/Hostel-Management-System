@@ -1,6 +1,9 @@
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Landing_Page_Controller {
 
@@ -41,4 +44,20 @@ public class Landing_Page_Controller {
         Button_Guest.setOnMouseExited(e -> Button_Guest.setStyle("-fx-background-color: transparent; -fx-text-flll: #232323;"));
 
     }
+    public void Pressed_Hostel_Button(ActionEvent event)
+    {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        
+            stage.setScene(App.getScene2());
+        
+    }
+    public void Pressed_Guest_Button(ActionEvent event)
+    {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        
+            stage.setScene(App.getScene3());
+    }
+
 }

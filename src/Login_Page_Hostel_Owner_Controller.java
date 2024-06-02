@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class Login_Page_Controller {
+public class Login_Page_Hostel_Owner_Controller {
 
     @FXML
     private StackPane Button_with_G_Icon;

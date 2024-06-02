@@ -1,0 +1,31 @@
+#Text, #Check_Box_Text{
+    -fx-text-fill : #ffffff;
+    -fx-fill: #ffffff;
+    -fx-stroke: #ffffff;
+}
+
+#HyperLink
+{
+    -fx-text-fill : #E54F6D;
+}
+
+#Login_Area
+{
+    -fx-background-color : #232323;
+}
+
+#Google_SignIn_Button
+{
+    -fx-background-color: none; 
+    -fx-border-color: white;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+
+}
+
+#Email_Text_Field , #Password_TextField, #Login_Button
+{
+    -fx-background-color: #e5d7d7;
+    -fx-prompt-text-fill: #404040;
+    -fx-background-radius: 5px;
+}

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="636.0" stylesheets="@Login_Page_Hostel_Owner.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Page_Hostel_Owner_Controller">
+   <children>
+      <HBox prefHeight="425.0" prefWidth="636.0" style="-fx-background-color: black;">
+         <children>
+            <VBox fx:id="Login_Area" prefHeight="425.0" prefWidth="318.0">
+               <children>
+                  <Text id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back !" wrappingWidth="125.90538787841797">
+                     <font>
+                        <Font name="BrandonText-Regular" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="46.0" top="31.0" />
+                     </VBox.margin></Text>
+                  <Text id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="The Faster You Fill Up The Faster You Enjoy" wrappingWidth="263.2387008666992">
+                     <font>
+                        <Font name="BrandonText-Regular" size="10.5" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="46.0" top="4.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="27.9053955078125">
+                     <font>
+                        <Font name="BrandonText-Regular" size="10.5" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="46.0" top="18.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField fx:id="Email_Text_Field" promptText="Enter Your Email">
+                     <VBox.margin>
+                        <Insets left="46.0" right="40.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="7.0" left="9.0" top="7.0" />
+                     </padding>
+                  </TextField>
+                  <Text id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="45.23874092102051">
+                     <font>
+                        <Font name="BrandonText-Regular" size="10.5" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="46.0" top="7.0" />
+                     </VBox.margin>
+                  </Text>
+                  <PasswordField fx:id="Password_TextField" promptText="Enter Your Password">
+                     <VBox.margin>
+                        <Insets left="46.0" right="40.0" top="12.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="7.0" left="9.0" top="7.0" />
+                     </padding>
+                  </PasswordField>
+                  <ImageView fitHeight="27.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets left="255.0" top="-23.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@../Assets/Login_Screen/eye_off.png" />
+                     </image>
+                  </ImageView>
+                  <HBox>
+                     <children>
+                        <CheckBox id="Check_Box_Text" fx:id="Remeber_Me" mnemonicParsing="false" prefHeight="10.0" prefWidth="63.0" text="Remember Me">
+                           <HBox.margin>
+                              <Insets top="12.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="6.0" />
+                           </font>
+                        </CheckBox>
+                        <Hyperlink id="HyperLink" fx:id="Forgot_Password" prefHeight="15.0" prefWidth="57.0" text="Forgot Password">
+                           <HBox.margin>
+                              <Insets left="112.0" top="8.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="7.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="46.0" right="30.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Button id="Login_Button" fx:id="Login_Button" alignment="CENTER" mnemonicParsing="false" text="Login">
+                     <VBox.margin>
+                        <Insets left="46.0" top="22.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.25" left="101.0" right="101.0" top="5.25" />
+                     </padding>
+                  </Button>
+                  <HBox>
+                     <children>
+                        <Line id="Text" endX="35.0" fill="BLACK">
+                           <HBox.margin>
+                              <Insets left="89.0" top="18.0" />
+                           </HBox.margin>
+                        </Line>
+                        <Text id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Or Login With">
+                           <HBox.margin>
+                              <Insets left="9.0" top="11.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Text>
+                        <Line id="Text" endX="35.0">
+                           <HBox.margin>
+                              <Insets left="10.0" top="18.0" />
+                           </HBox.margin>
+                        </Line>
+                     </children>
+                  </HBox>
+                  <StackPane fx:id="Button_with_G_Icon" prefHeight="28.0" prefWidth="277.0">
+                     <children>
+                        <Button fx:id="Google_SignIn_Button" alignment="CENTER" mnemonicParsing="false" text="Sign in with Google">
+                           <padding>
+                              <Insets bottom="5.25" left="69.0" right="61.0" top="5.25" />
+                           </padding>
+                           <StackPane.margin>
+                              <Insets left="8.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <ImageView fitHeight="23.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
+                           <image>
+                              <Image url="@../Assets/file.png" />
+                           </image>
+                           <StackPane.margin>
+                              <Insets left="50.0" />
+                           </StackPane.margin>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </StackPane>
+                  <HBox>
+                     <children>
+                        <Text id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Dont have an Account ?">
+                           <font>
+                              <Font name="BrandonText-Regular" size="7.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="1.0" />
+                           </HBox.margin>
+                        </Text>
+                        <Hyperlink id="HyperLink" fx:id="SignUp_Link" text="Sign Up">
+                           <HBox.margin>
+                              <Insets left="4.0" top="-7.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="BrandonText-Bold" size="10.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="99.0" top="64.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <StackPane prefHeight="373.0" prefWidth="319.0">
+               <children>
+                  <ImageView fitHeight="425.0" fitWidth="318.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Assets/nick-kimel-GrLnSHJT1fI-unsplash.jpg" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fill="#232323" height="425.0" opacity="0.7" stroke="TRANSPARENT" strokeType="INSIDE" width="318.0" />
+               </children>
+            </StackPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
