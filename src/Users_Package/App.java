@@ -35,7 +35,7 @@ public class App extends Application {
         scene_discount= new Scene(root_Discount,942,708);
         scene_hostel_Search = new Scene(root_Hostel_Search,600,400);
         scene_hostel_details = new Scene(root_hostel_details,600,400);
-        primaryStage.setScene(scene_hostel_Search);
+        primaryStage.setScene(scene);
 
 
         primaryStage.setTitle("HMS");

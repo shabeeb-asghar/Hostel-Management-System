@@ -87,6 +87,51 @@ CREATE TABLE feedbacks (
     FOREIGN KEY (hostel_id) REFERENCES hostels(id)
 );
 
+
+
+CREATE TABLE Payment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(50) NOT NULL,
+    challan VARCHAR(100),
+    accNo VARCHAR(100)
+);
+
+CREATE TABLE CreditCard (
+    id INT PRIMARY KEY,
+    FOREIGN KEY (id) REFERENCES Payment(id)
+);
+
+CREATE TABLE Cash (
+    id INT PRIMARY KEY,
+    FOREIGN KEY (id) REFERENCES Payment(id)
+);
+
+CREATE TABLE Bank (
+    id INT PRIMARY KEY,
+    FOREIGN KEY (id) REFERENCES Payment(id)
+);
+CREATE TABLE Students(
+ email VARCHAR(100) NOT NULL,
+ password VARCHAR(100) NOT NULL, 
+  contact_number VARCHAR(20) NOT NULL,
+  CNIC  VARCHAR(20) NOT NULL
+
+);
+CREATE TABLE items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    location VARCHAR(100) NOT NULL,
+    item VARCHAR(100) NOT NULL,
+    date DATE NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    description TEXT,
+    item_id VARCHAR(50)
+);
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    message VARCHAR(255) NOT NULL
+);
+
+
 SELECT * FROM hostels;
 SELECT * FROM rooms;
 SELECT * FROM beds;
@@ -104,5 +149,22 @@ VALUES
 ('Riverside Hostel', 'myPass789', '789 Pine St, Capital City', '345-678-9012', 12, 6, 1, 0),
 ('Mountain View Hostel', 'mountain123', '101 Mountain Rd, Rivertown', '456-789-0123', 5, 3, 1, 1),
 ('Seaside Hostel', 'beachPass', '202 Seaside Ave, Beachtown', '567-890-1234', 7, 2, 0, 0);
+
+
+-- Inserting dummy data into rooms table
+INSERT INTO rooms (hostel_id, name, availability, no_guests, capacity, price, room_no)
+VALUES
+    (1, 'Room A', 1, 2, 2, 75.00, 101),
+    (1, 'Room B', 1, 1, 1, 50.00, 102),
+    (1, 'Room C', 0, 0, 1, 60.00, 103),
+    (2, 'Room D', 1, 3, 3, 90.00, 201),
+    (2, 'Room E', 0, 0, 1, 40.00, 202),
+    (3, 'Room F', 1, 2, 2, 80.00, 301),
+    (3, 'Room G', 1, 1, 1, 55.00, 302),
+    (3, 'Room H', 0, 0, 1, 65.00, 303),
+    (4, 'Room I', 1, 2, 2, 70.00, 401),
+    (4, 'Room J', 1, 1, 1, 45.00, 402),
+    (5, 'Room K', 1, 3, 3, 85.00, 501),
+    (5, 'Room L', 0, 0, 1, 35.00, 502);
 
 

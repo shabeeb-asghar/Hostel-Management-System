@@ -33,6 +33,24 @@ public String getpassword()
     return PASSWORD;
 }
 
+public boolean validateLogintudents(String email, String password) {
+    String query = "SELECT * FROM Students WHERE email = ? AND password = ?";
+    
+    try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+         
+        pstmt.setString(1, email);
+        pstmt.setString(2, password);
+        
+        ResultSet resultSet = pstmt.executeQuery();
+        
+        return resultSet.next(); // Return true if a record is found, false otherwise
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
 public void updateRoomAvailability(int roomId, boolean availability) {
     String updateQuery = "UPDATE rooms SET availability = ? WHERE id = ?";
 
