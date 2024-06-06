@@ -94,3 +94,25 @@ SELECT * FROM laundary_services;
 SELECT * FROM discounts;
 SELECT * FROM feedbacks;
 
+CREATE TABLE Payment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(50) NOT NULL,
+    challan VARCHAR(100),
+    accNo VARCHAR(100)
+);
+
+CREATE TABLE CreditCard (
+    id INT PRIMARY KEY,
+    FOREIGN KEY (id) REFERENCES Payment(id)
+);
+
+CREATE TABLE Cash (
+    id INT PRIMARY KEY,
+    FOREIGN KEY (id) REFERENCES Payment(id)
+);
+
+CREATE TABLE Bank (
+    id INT PRIMARY KEY,
+    FOREIGN KEY (id) REFERENCES Payment(id)
+);
+

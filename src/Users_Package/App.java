@@ -12,6 +12,7 @@ public class App extends Application {
     //sania add this
     private static Scene scene_register_hostel;
     private static Scene scene_discount;
+    private static Scene scene_Make_payment;
     //
 
     @Override
@@ -22,18 +23,24 @@ public class App extends Application {
         //sania add this
         Parent root_Registration_hostel= FXMLLoader.load(getClass().getResource("Registration_Hostel.fxml")); 
         Parent root_Discount=FXMLLoader.load(getClass().getResource("Discount.fxml"));
+        Parent root_Make_payment= FXMLLoader.load(getClass().getResource("Make_Payment.fxml"));
         //
         Scene scene = new Scene(root, 626, 425);
         scene2 = new Scene(root2,626,425);
         scene3 = new Scene(root3,626,425);
         scene_register_hostel = new Scene(root_Registration_hostel,626,465);
         scene_discount= new Scene(root_Discount,942,708);
+        scene_Make_payment= new Scene(root_Make_payment,942,608);
         primaryStage.setScene(scene);
 
 
         primaryStage.setTitle("HMS");
 
         primaryStage.show();
+    }
+    public static Scene getScene_make_payment()
+    {
+        return scene_Make_payment;
     }
     public static Scene getScene2()
     {

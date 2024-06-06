@@ -70,7 +70,7 @@ public class Discount_Controller {
     @FXML
     private Button delete;
     @FXML
-    private Button undo;
+    private Button Back;
 
     private Discounts discounts;
 
@@ -260,8 +260,8 @@ private void deleteButton() {
 
 
     @FXML
-    private void undoButton() {
-        // Implementation of undoButton method
+    private void BackButton() {
+        // Implementation of BackButton method
     }
 
     private void loadDiscounts() {
