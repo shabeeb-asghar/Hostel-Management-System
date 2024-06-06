@@ -12,6 +12,10 @@ public class App extends Application {
     private static Scene scene_register_hostel;
     private static Scene scene_discount;
     //
+    private static Scene scene_hostel_Search;
+    private static Scene scene_hostel_details;
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -21,13 +25,17 @@ public class App extends Application {
         //sania add this
         Parent root_Registration_hostel= FXMLLoader.load(getClass().getResource("Registration_Hostel.fxml")); 
         Parent root_Discount=FXMLLoader.load(getClass().getResource("Discount.fxml"));
+        Parent root_Hostel_Search = FXMLLoader.load(getClass().getResource("Search_Hostel.fxml"));
+        Parent root_hostel_details = FXMLLoader.load(getClass().getResource("Hostel_Details.fxml"));
         //
         Scene scene = new Scene(root, 626, 425);
         scene2 = new Scene(root2,626,425);
         scene3 = new Scene(root3,626,425);
         scene_register_hostel = new Scene(root_Registration_hostel,626,465);
         scene_discount= new Scene(root_Discount,942,708);
-        primaryStage.setScene(scene);
+        scene_hostel_Search = new Scene(root_Hostel_Search,600,400);
+        scene_hostel_details = new Scene(root_hostel_details,600,400);
+        primaryStage.setScene(scene_hostel_Search);
 
 
         primaryStage.setTitle("HMS");
@@ -51,7 +59,10 @@ public class App extends Application {
     {
         return scene_discount;
     }
-    //
+    public static Scene getScene_Hostel_Details()
+    {
+        return scene_hostel_details;
+    }
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

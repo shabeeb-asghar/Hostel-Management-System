@@ -30,7 +30,7 @@ public class Discount_Controller {
   
    
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234Qwert@";
+    private static final String PASSWORD = "shabeeb";
    
     @FXML
     private ComboBox<String> Hostel_Name;

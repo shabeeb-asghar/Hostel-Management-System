@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import Hostel_Package.Bed;
@@ -16,7 +17,6 @@ import Hostel_Package.SingleSeater;
 
 public class dataBase {
  private static final String URL = "jdbc:mysql://localhost:3306/sda_project_final_db";
-  
    
     private static final String USERNAME = "root";
     private static final String PASSWORD = "shabeeb";
@@ -32,6 +32,88 @@ public String getpassword()
 {
     return PASSWORD;
 }
+
+public void updateRoomAvailability(int roomId, boolean availability) {
+    String updateQuery = "UPDATE rooms SET availability = ? WHERE id = ?";
+
+    try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+         PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
+
+        pstmt.setBoolean(1, availability);
+        pstmt.setInt(2, roomId);
+
+        int rowsAffected = pstmt.executeUpdate();
+        if (rowsAffected > 0) {
+            System.out.println("Room availability updated successfully.");
+        } else {
+            System.out.println("Room not found or no change in availability.");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+public List<Hostel> fetchHostelData() {
+        List<Hostel> hostels = new ArrayList<>();
+        String query = "SELECT id, name, password, location, contact_number, number_of_one_bed_rooms, number_of_two_bed_rooms, laundry_service, mess_service FROM hostels";
+        String roomQuery = "SELECT id, name, availability, no_guests, capacity, price, room_no FROM rooms WHERE hostel_id = ?";
+        String bedQuery = "SELECT id, available FROM beds WHERE room_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(query);
+             PreparedStatement roomStmt = conn.prepareStatement(roomQuery);
+             PreparedStatement bedStmt = conn.prepareStatement(bedQuery);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String password = rs.getString("password");
+                String location = rs.getString("location");
+                String contactNumber = rs.getString("contact_number");
+                int numberOfOneBedRooms = rs.getInt("number_of_one_bed_rooms");
+                int numberOfTwoBedRooms = rs.getInt("number_of_two_bed_rooms");
+                boolean laundryService = rs.getBoolean("laundry_service");
+                boolean messService = rs.getBoolean("mess_service");
+
+                Hostel hostel = new Hostel(name, password, location, contactNumber, numberOfOneBedRooms, numberOfTwoBedRooms, laundryService, messService);
+                hostel.setId(id);
+                roomStmt.setInt(1, id);
+                try (ResultSet roomRs = roomStmt.executeQuery()) {
+                    while (roomRs.next()) {
+                        int roomId = roomRs.getInt("id");
+                        String roomName = roomRs.getString("name");
+                        boolean availability = roomRs.getBoolean("availability");
+                        int noGuests = roomRs.getInt("no_guests");
+                        int capacity = roomRs.getInt("capacity");
+                        double price = roomRs.getDouble("price");
+                        int roomNo = roomRs.getInt("room_no");
+
+                        Room room = new Room(roomName, availability, noGuests, capacity, price, roomNo);
+
+                        // Fetch beds for the room
+                        bedStmt.setInt(1, roomId);
+                        try (ResultSet bedRs = bedStmt.executeQuery()) {
+                            while (bedRs.next()) {
+                                int bedId = bedRs.getInt("id");
+                                boolean bedAvailable = bedRs.getBoolean("available");
+
+                                Bed bed = new Bed(bedId,bedAvailable);
+                                room.addBed(bed);
+                            }
+                        }
+
+                        hostel.addRoom(room);
+                    }
+                }
+
+                hostels.add(hostel);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hostels;
+    }
     // Method to insert hostel data into the database
     public static void insertHostel(Hostel hostel) {
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
@@ -72,7 +154,7 @@ public String getpassword()
     private static void insertRoom(Connection connection, int hostelId, List<Room> rooms) {
         try {
             // Prepare SQL statement for inserting room data
-            String roomSql = "INSERT INTO rooms (hostel_id, name, availability) VALUES (?, ?, ?)";
+            String roomSql = "INSERT INTO rooms (hostel_id, name, availability) VALUES (?, ?, ?,?,?,?,?)";
             PreparedStatement roomStatement = connection.prepareStatement(roomSql, Statement.RETURN_GENERATED_KEYS);
             
             // Prepare SQL statement for inserting bed data
@@ -85,6 +167,11 @@ public String getpassword()
                 roomStatement.setInt(1, hostelId);
                 roomStatement.setString(2, room.getName());
                 roomStatement.setBoolean(3, room.isAvailable());
+                roomStatement.setInt(4, room.getGuestNo());
+                roomStatement.setInt(5, room.getCapacity());
+                roomStatement.setDouble(6, room.getRoomPrice());
+                roomStatement.setInt(7, room.getRoomNo());
+
                 
                 // Execute the SQL statement to insert room data
                 int roomRowsInserted = roomStatement.executeUpdate();

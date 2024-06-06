@@ -12,6 +12,7 @@ public class Hostel { //controller
     private int Hostelid;
         private String name;
         private String password;
+        private double Price;
         private String location;
         private String contactNumber;
         private int numberOfOneBedRooms;
@@ -45,7 +46,7 @@ public class Hostel { //controller
        
         
         // Initialize rooms
-        initializeRooms();
+        //initializeRooms();
         // Initialize services
         initializeServices();
         }
@@ -54,36 +55,40 @@ public class Hostel { //controller
         {
             Hostelid=id;
         }
-private String generateRoomName() {
-    return name + "_Room_" + roomCounter++;
-}
+        public void addRoom(Room r)
+        {
+            this.rooms.add(r);
+        }
+// private String generateRoomName() {
+//     return name + "_Room_" + roomCounter++;
+// }
 
-private int generateBedID() {
-    return bedCounter++;
-}
+// private int generateBedID() {
+//     return bedCounter++;
+// }
 
         public List<Room> getRooms() {
             return rooms;
         }
-        private void initializeRooms() {
+        // private void initializeRooms() {
             
-            for (int i = 0; i < numberOfOneBedRooms; i++) {
-                Room room = new Room();
-                room.setName(generateRoomName());
-                room.addBed(new SingleSeater(generateBedID()));
-                rooms.add(room);
+        //     for (int i = 0; i < numberOfOneBedRooms; i++) {
+        //         Room room = new Room();
+        //         room.setName(generateRoomName());
+        //         room.addBed(new SingleSeater(generateBedID()));
+        //         rooms.add(room);
                
-            }
-            for (int i = 0; i < numberOfTwoBedRooms; i++) {
-                Room room = new Room();
-        room.setName(generateRoomName());
-        room.addBed(new DoubleSeater(generateBedID()));
-        room.addBed(new DoubleSeater(generateBedID())); // Assuming two beds in each two-bed room
-        rooms.add(room);
+        //     }
+        //     for (int i = 0; i < numberOfTwoBedRooms; i++) {
+        //         Room room = new Room();
+        // room.setName(generateRoomName());
+        // room.addBed(new DoubleSeater(generateBedID()));
+        // room.addBed(new DoubleSeater(generateBedID())); // Assuming two beds in each two-bed room
+        // rooms.add(room);
                 
-            }
+        //     }
             
-        }
+        // }
 
 
         private void initializeServices() {
@@ -95,6 +100,10 @@ private int generateBedID() {
             }
         }
         // Getters
+        public double getPrice()
+        {
+            return Price;
+        }
         public String getName() {
             return name;
         }
@@ -170,7 +179,20 @@ private int generateBedID() {
             }
             return null; // Return null if hostel does not have a laundry service
         }
-    
+        public void printDetails() {
+            System.out.println("Hostel Details:");
+            System.out.println("-------------------------------");
+            System.out.println("Hostel ID: " + Hostelid);
+            System.out.println("Name: " + name);
+            System.out.println("Location: " + location);
+            System.out.println("Contact Number: " + contactNumber);
+            System.out.println("Number of One Bed Rooms: " + numberOfOneBedRooms);
+            System.out.println("Number of Two Bed Rooms: " + numberOfTwoBedRooms);
+            System.out.println("Laundry Service: " + (laundryService ? "Available" : "Not Available"));
+            System.out.println("Mess Service: " + (messService ? "Available" : "Not Available"));
+            System.out.println("Price: RS " + Price);
+            System.out.println("-------------------------------");
+        }
        
 }
 

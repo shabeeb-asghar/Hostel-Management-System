@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox fx:id="Hostel_Data" prefHeight="107.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Users_Package.Hostel_Item_Controller">
+   <children>
+      <ImageView fx:id="Image" fitHeight="107.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Assets/nick-kimel-GrLnSHJT1fI-unsplash.jpg" />
+         </image>
+      </ImageView>
+      <VBox prefHeight="115.0" prefWidth="342.0">
+         <children>
+            <Text fx:id="Hostel_Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Hostel Name" textAlignment="CENTER" wrappingWidth="339.5376739501953">
+               <font>
+                  <Font name="BrandonText-Bold" size="19.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="19.0" prefWidth="318.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price: ">
+                     <font>
+                        <Font name="BrandonText-Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="Hostel_Price" strokeType="OUTSIDE" strokeWidth="0.0" text="RS 19000" textAlignment="CENTER" wrappingWidth="268.66664123535156" x="5.0">
+                     <font>
+                        <Font name="BrandonText-Regular" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="19.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rooms:">
+                     <font>
+                        <Font name="BrandonText-Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="Hostel_Rooms" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="264.66676330566406" x="5.0">
+                     <font>
+                        <Font name="BrandonText-Regular" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="19.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mess:">
+                     <font>
+                        <Font name="BrandonText-Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="Mess" strokeType="OUTSIDE" strokeWidth="0.0" text="True" textAlignment="CENTER" wrappingWidth="37.3333740234375" x="5.0">
+                     <font>
+                        <Font name="BrandonText-Regular" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Laundry">
+                     <font>
+                        <Font name="BrandonText-Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="180.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="Laundry" strokeType="OUTSIDE" strokeWidth="0.0" text="True" textAlignment="CENTER" wrappingWidth="37.3333740234375" x="5.0">
+                     <font>
+                        <Font name="BrandonText-Regular" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="19.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contact:">
+                     <font>
+                        <Font name="BrandonText-Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="Contact" strokeType="OUTSIDE" strokeWidth="0.0" text="03357214012" textAlignment="CENTER" wrappingWidth="256.0000762939453" x="5.0">
+                     <font>
+                        <Font name="BrandonText-Regular" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>

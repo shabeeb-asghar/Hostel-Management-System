@@ -1,0 +1,25 @@
+#Hostel_Area, #Data_Area, #Hostel_Data{
+ -fx-background-color: #e5d7d7   
+}
+#Side_Bar{
+    -fx-background-color: #232322  
+
+}
+#Home_Button ,#Book_Hostel_Button, #Search_Hostel_Button, #Feedback_Button, #Profile_Button, #Notifcation_Button, #Logout_Button,#Whole_Page
+{
+    -fx-background-color: none;
+    -fx-text-fill: #e5d7d7;
+
+}
+#Image {
+    -fx-border-color: black;        /* Border color */
+    -fx-border-width: 2px;          /* Border width */
+    -fx-border-style: solid;        /* Border style (solid, dashed, dotted, etc.) */
+    -fx-border-radius: 10px;        /* Border radius */
+    -fx-background-radius: 10px;    /* Background radius to match the border radius */
+    -fx-padding: 5px;               /* Optional padding around the image */
+}
+#Laundry, #Mess
+{
+    
+}

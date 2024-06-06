@@ -1,0 +1,10 @@
+#Side_Bar{
+    -fx-background-color: #232322  
+
+}
+#Home_Button ,#Book_Hostel_Button, #Search_Hostel_Button, #Feedback_Button, #Profile_Button, #Notifcation_Button, #Logout_Button,#Whole_Page
+{
+    -fx-background-color: none;
+    -fx-text-fill: #e5d7d7;
+
+}

@@ -7,9 +7,9 @@ public class Bed {
     private int id;
     private boolean available;
    
-    public Bed(int id) {
+    public Bed(int id, boolean ava) {
         this.id = id;
-        this.available = true; // Assuming beds are available by default
+        this.available = ava; // Assuming beds are available by default
     }
     
     public int getID() {

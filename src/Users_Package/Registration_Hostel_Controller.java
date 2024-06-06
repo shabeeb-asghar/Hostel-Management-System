@@ -59,8 +59,8 @@ public class Registration_Hostel_Controller {
         
     
         // Initialize room ComboBoxes
-        one_bed_room.getItems().addAll("1", "2", "3", "4", "5");
-        two_bed_room.getItems().addAll("1", "2", "3", "4", "5");
+        //one_bed_room.getItems().addAll("1", "2", "3", "4", "5");
+        //two_bed_room.getItems().addAll("1", "2", "3", "4", "5");
     
        
     

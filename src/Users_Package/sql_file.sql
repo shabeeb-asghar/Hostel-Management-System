@@ -20,6 +20,10 @@ CREATE TABLE rooms (
     hostel_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
     availability bit NOT NULL,
+    no_guests int not NULL,
+    capacity int not NULL,
+    price double not NULL,
+    room_no int not NULL,
     FOREIGN KEY (hostel_id) REFERENCES hostels(id)
 );
 
@@ -93,4 +97,12 @@ SELECT * FROM mess_systems;
 SELECT * FROM laundary_services;
 SELECT * FROM discounts;
 SELECT * FROM feedbacks;
+INSERT INTO hostels (name, password, location, contact_number, number_of_one_bed_rooms, number_of_two_bed_rooms, laundry_service, mess_service)
+VALUES 
+('Greenwood Hostel', 'password123', '123 Main St, Springfield', '123-456-7890', 10, 5, 1, 1),
+('Sunset Hostel', 'securePass1', '456 Oak St, Shelbyville', '234-567-8901', 8, 4, 0, 1),
+('Riverside Hostel', 'myPass789', '789 Pine St, Capital City', '345-678-9012', 12, 6, 1, 0),
+('Mountain View Hostel', 'mountain123', '101 Mountain Rd, Rivertown', '456-789-0123', 5, 3, 1, 1),
+('Seaside Hostel', 'beachPass', '202 Seaside Ave, Beachtown', '567-890-1234', 7, 2, 0, 0);
+
 

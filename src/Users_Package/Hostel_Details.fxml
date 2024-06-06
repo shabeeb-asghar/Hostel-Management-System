@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="636.0" stylesheets="@Search_Hostel.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Users_Package.Hostel_Details_Controller">
+   <children>
+      <ScrollPane fx:id="Image_Area" layoutX="165.0" prefHeight="145.0" prefWidth="471.0" />
+      <Pane fx:id="Side_Bar" layoutX="-1.0" prefHeight="425.0" prefWidth="166.0">
+         <children>
+            <Button fx:id="Home_Button" layoutY="58.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Home" />
+            <Button fx:id="Book_Hostel_Button" layoutY="83.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Book Hostel" />
+            <Button fx:id="Search_Hostel_Button" layoutX="-1.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Search Hostel" />
+            <Button fx:id="Notifcation_Button" layoutY="133.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Notfications" />
+            <Button fx:id="Feedback_Button" layoutY="158.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Feedbacks" />
+            <Button fx:id="Profile_Button" layoutY="184.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Profile" />
+            <Button fx:id="Logout_Button" layoutX="-1.0" layoutY="386.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Logout" />
+         </children>
+      </Pane>
+      <VBox layoutX="165.0" layoutY="145.0" prefHeight="279.0" prefWidth="471.0">
+         <children>
+            <Text fx:id="Hostel_Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Hostel_Name" textAlignment="CENTER" wrappingWidth="469.7116241455078">
+               <font>
+                  <Font name="BrandonText-Bold" size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Availible Rooms:">
+               <font>
+                  <Font name="BrandonText-Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="3.0" />
+               </VBox.margin>
+            </Text>
+            <ScrollPane  prefHeight="235.0" prefWidth="471.0">
+               <content>
+                  <VBox fx:id="Room_Area" prefHeight="227.0" prefWidth="468.0" />
+               </content></ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
