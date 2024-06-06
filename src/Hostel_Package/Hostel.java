@@ -6,7 +6,10 @@ import Setting_Package.Discounts;
 import Setting_Package.Feedback;
 
 public class Hostel { //controller
-
+    
+    private int roomCounter = 1; // Counter for generating room names
+    private int bedCounter = 1; // Counter for generating bed IDs
+    private int Hostelid;
         private String name;
         private String password;
         private String location;
@@ -21,8 +24,11 @@ public class Hostel { //controller
     //private List<User> users;
     private List<Service> services;
     private MessSystem messSystem;
+
+    
         // Constructor
         public Hostel(String name, String password, String location, String contactNumber, int numberOfOneBedRooms, int numberOfTwoBedRooms, boolean laundryService, boolean messService) {
+            
             this.name = name;
             this.password = password;
             this.location = location;
@@ -36,24 +42,50 @@ public class Hostel { //controller
         this.messSystem = new MessSystem();
         this.feedback= new ArrayList<>();
         this.discount=new ArrayList<>();
+       
+        
         // Initialize rooms
         initializeRooms();
         // Initialize services
         initializeServices();
         }
+       
+        public void setId(int id)
+        {
+            Hostelid=id;
+        }
+private String generateRoomName() {
+    return name + "_Room_" + roomCounter++;
+}
+
+private int generateBedID() {
+    return bedCounter++;
+}
+
+        public List<Room> getRooms() {
+            return rooms;
+        }
         private void initializeRooms() {
+            
             for (int i = 0; i < numberOfOneBedRooms; i++) {
                 Room room = new Room();
-                room.addBed(new SingleSeater());
+                room.setName(generateRoomName());
+                room.addBed(new SingleSeater(generateBedID()));
                 rooms.add(room);
+               
             }
             for (int i = 0; i < numberOfTwoBedRooms; i++) {
                 Room room = new Room();
-                room.addBed(new DoubleSeater());
-                rooms.add(room);
+        room.setName(generateRoomName());
+        room.addBed(new DoubleSeater(generateBedID()));
+        room.addBed(new DoubleSeater(generateBedID())); // Assuming two beds in each two-bed room
+        rooms.add(room);
+                
             }
+            
         }
-    
+
+
         private void initializeServices() {
             if (laundryService) {
                 services.add(new Laundary());
@@ -118,5 +150,27 @@ public class Hostel { //controller
         public void removeService(Service service) {
             services.remove(service);
         }
+
+        public String getLaundryService() {
+            for (Service service : services) {
+                if (service instanceof Laundary) {
+                    // Assuming you have a method to get the laundry service name from your Laundary class
+                    return ((Laundary) service).getname(); // Return the laundry service name
+                }
+            }
+            return null; // Return null if hostel does not have a laundry service
+        }
+        
+        public String getMessService() {
+            for (Service service : services) {
+                if (service instanceof MessSystem) {
+                    // Assuming you have a method to get the laundry service name from your Laundary class
+                    return ((MessSystem) service).getmenu(); // Return the laundry service name
+                }
+            }
+            return null; // Return null if hostel does not have a laundry service
+        }
+    
+       
 }
 

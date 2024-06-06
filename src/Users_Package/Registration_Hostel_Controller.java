@@ -3,6 +3,7 @@ import Hostel_Package.Hostel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -13,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.stage.Stage;
 
 public class Registration_Hostel_Controller {
 
@@ -74,7 +76,7 @@ public class Registration_Hostel_Controller {
         });
     }
     @FXML
-    private void OnClick() {
+    private void OnClick(ActionEvent event) {
         try {
             validateInputs();
 
@@ -99,14 +101,23 @@ public class Registration_Hostel_Controller {
 
             // Process registration
             registerHostel();
-
+            insertHostelIntoDatabase();
             // Display success message
             showSuccessAlert();
-            createHostelFromFormData();
+            //viewAllHostelDetails();
+            Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        
+        
+        stage.setScene(App.getScene_Discount());
 
         } catch (IllegalArgumentException e) {
             showErrorAlert(e.getMessage());
         }
+    }
+    private void insertHostelIntoDatabase() {
+        Hostel hostel = createHostelFromFormData();
+        dataBase.insertHostel(hostel);
     }
     
     private Hostel createHostelFromFormData() {
@@ -131,6 +142,7 @@ public class Registration_Hostel_Controller {
     private void registerHostel() {
         // Registration logic
         System.out.println("Hostel registration logic goes here...");
+      //  Hostel.viewAllHostelDetails();
     }
 
     private void validateInputs() {

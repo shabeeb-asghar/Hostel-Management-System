@@ -52,6 +52,7 @@ public class Landing_Page_Controller {
         
           //  stage.setScene(App.getScene2());
           stage.setScene(App.getScene_register_hostel());
+        //stage.setScene(App.getScene_Discount());
         
     }
     public void Pressed_Guest_Button(ActionEvent event)

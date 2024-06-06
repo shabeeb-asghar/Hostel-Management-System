@@ -41,7 +41,7 @@ public class Settings {
         this.discount.updateDiscount(oldDlsCode, oldAmount, oldDeadline, newDlsCode, newAmount, newDeadline);
     }
 
-    public List<String> getDiscounts() {
+    public List<Single_Discount> getDiscounts() {
         return this.discount.getAllDiscounts();
     }
    /*  public void setNotification(String input) {

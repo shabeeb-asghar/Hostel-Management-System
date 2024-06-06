@@ -3,14 +3,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessSystem extends Service {
-  private String menu;
+  private String menu="Menu";
     private List<String> items;
 
     public MessSystem() {
         super();
         this.items = new ArrayList<>();
     }
-
+    public String getmenu()
+    {
+        return menu;
+    }
     public void addMenu(String item) {
         items.add(item);
     }

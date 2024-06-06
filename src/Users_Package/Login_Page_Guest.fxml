@@ -17,9 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="636.0" stylesheets="@Login_Page_Hostel_Owner.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login_Page_Hostel_Owner_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="636.0" stylesheets="@Login_Page_Guest.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Users_Package.Login_Page_Guest_Controller">
    <children>
-      <HBox prefHeight="425.0" prefWidth="636.0" style="-fx-background-color: black;">
+      <HBox prefHeight="425.0" prefWidth="636.0" style="-fx-background-color: #c3b6b6;">
          <children>
             <VBox fx:id="Login_Area" prefHeight="425.0" prefWidth="318.0">
                <children>
@@ -190,10 +190,10 @@
                <children>
                   <ImageView fitHeight="425.0" fitWidth="318.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../Assets/nick-kimel-GrLnSHJT1fI-unsplash.jpg" />
+                        <Image url="@../Assets/matese-fields-pvHma684eEI-unsplash.jpg" />
                      </image>
                   </ImageView>
-                  <Rectangle fill="#232323" height="425.0" opacity="0.7" stroke="TRANSPARENT" strokeType="INSIDE" width="318.0" />
+                  <Rectangle fill="#c3b6b6" height="425.0" opacity="0.89" stroke="TRANSPARENT" strokeType="INSIDE" width="318.0" />
                </children>
             </StackPane>
          </children>

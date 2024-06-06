@@ -30,11 +30,7 @@ public class Discounts {
         }
     }
 
-    public List<String> getAllDiscounts() {
-        List<String> discountList = new ArrayList<>();
-        for (Single_Discount discount : discounts) {
-            discountList.add(discount.toString());
-        }
-        return discountList;
+    public List<Single_Discount> getAllDiscounts() {
+        return new ArrayList<>(discounts);
     }
 }
