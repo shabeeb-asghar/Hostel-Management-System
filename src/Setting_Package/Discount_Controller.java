@@ -3,6 +3,9 @@ package Setting_Package;
 import Setting_Package.Discounts;
 import Setting_Package.Single_Discount;
 import Users_Package.dataBase;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,7 +18,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import Hostel_Package.Hostel;
 import Hostel_Package.Room;
@@ -40,17 +45,20 @@ public class Discount_Controller {
     @FXML
     private DatePicker deadline;
     @FXML
-    private TableView<Single_Discount> tableView;
+    private TableColumn<ObservableList<String>, String> nameCol;
     @FXML
-    private TableColumn<Single_Discount, String> nameCol;
+    private TableColumn<ObservableList<String>, String> locCol;
     @FXML
-    private TableColumn<Single_Discount, String> locCol;
+    private TableColumn<ObservableList<String>, String> roomCol;
     @FXML
-    private TableColumn<Single_Discount, String> numCol;
+    private TableColumn<ObservableList<String>, String> DiscodeCol;
     @FXML
-    private TableColumn<Single_Discount, String> roomCol;
+    private TableColumn<ObservableList<String>, String> discountCol;
     @FXML
-    private TableColumn<Single_Discount, String> discountCol;
+    private TableColumn<ObservableList<String>, String> deadlinecol;
+
+    @FXML
+    private TableView<ObservableList<String>> tableView;
     @FXML
     private TextArea descArea;
     @FXML
@@ -73,9 +81,12 @@ public class Discount_Controller {
     @FXML
     private void initialize() {
         // Initialize the table columns
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("dlsCode"));
-        locCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        numCol.setCellValueFactory(new PropertyValueFactory<>("deadline"));
+        nameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(0)));
+        locCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(1)));
+        roomCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(2)));
+        DiscodeCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(3)));
+        discountCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(4)));
+        deadlinecol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(5)));
 
         // Load initial data
         loadDiscounts();
@@ -84,13 +95,11 @@ public class Discount_Controller {
     }
 
     private void populateDiscountAmountComboBox() {
-        // Add predefined discount values to the Discountamount ComboBox
         Discountamount.getItems().addAll("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%");
     }
 
     private void populateHostelComboBox() {
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            // Fetch hostels
             String hostelQuery = "SELECT id, name, location FROM hostels";
             PreparedStatement hostelStatement = connection.prepareStatement(hostelQuery);
             ResultSet hostelResultSet = hostelStatement.executeQuery();
@@ -100,11 +109,9 @@ public class Discount_Controller {
                 String hostelName = hostelResultSet.getString("name");
                 String hostelLocation = hostelResultSet.getString("location");
 
-                // Add to ComboBoxes
                 Hostel_Name.getItems().add(hostelName);
                 Location.getItems().add(hostelLocation);
 
-                // Fetch rooms for each hostel
                 String roomQuery = "SELECT name FROM rooms WHERE hostel_id = ?";
                 PreparedStatement roomStatement = connection.prepareStatement(roomQuery);
                 roomStatement.setInt(1, hostelId);
@@ -128,144 +135,171 @@ public class Discount_Controller {
         String code = discountcode.getText();
         String amount = Discountamount.getValue();
         LocalDate deadlineDate = deadline.getValue();
-
+    
+        // Validate input
         if (hostelName == null || location == null || room == null || code.isEmpty() || amount == null || deadlineDate == null) {
-            // Show error message
             showAlert(Alert.AlertType.ERROR, "Form Error!", "Please enter all the fields");
             return;
         }
-
-        // Convert amount and deadline
-        float discountAmount = Float.parseFloat(amount.replace("%", "")) / 100; // Convert percentage to a decimal
+    
+        float discountAmount = Float.parseFloat(amount.replace("%", "")) / 100;
         Date discountDeadline = Date.valueOf(deadlineDate);
-
+    
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            // Fetch the hostel_id based on hostel name
             String hostelIdQuery = "SELECT id FROM hostels WHERE name = ?";
-            PreparedStatement hostelIdStatement = connection.prepareStatement(hostelIdQuery);
-            hostelIdStatement.setString(1, hostelName);
-            ResultSet resultSet = hostelIdStatement.executeQuery();
-            int hostelId = 0;
-            if (resultSet.next()) {
-                hostelId = resultSet.getInt("id");
+            try (PreparedStatement hostelIdStatement = connection.prepareStatement(hostelIdQuery)) {
+                hostelIdStatement.setString(1, hostelName);
+                try (ResultSet resultSet = hostelIdStatement.executeQuery()) {
+                    int hostelId = 0;
+                    tableView.getItems().clear(); 
+                    if (resultSet.next()) {
+                        hostelId = resultSet.getInt("id");
+                    }
+    
+                    String insertDiscountQuery = "INSERT INTO discounts (hostel_id, dls_code, amount, deadline) VALUES (?, ?, ?, ?)";
+                    try (PreparedStatement insertDiscountStatement = connection.prepareStatement(insertDiscountQuery)) {
+                        insertDiscountStatement.setInt(1, hostelId);
+                        insertDiscountStatement.setString(2, code);
+                        insertDiscountStatement.setFloat(3, discountAmount);
+                        insertDiscountStatement.setDate(4, discountDeadline);
+                        insertDiscountStatement.executeUpdate();
+                        loadDiscounts();
+                        // Clear form fields
+                        clearForm();
+    
+                        showAlert(Alert.AlertType.INFORMATION, "Success", "Discount added successfully.");
+                    }
+                }
             }
-
-            // Insert the discount into the discounts table
-            String insertDiscountQuery = "INSERT INTO discounts (hostel_id, dls_code, amount, deadline) VALUES (?, ?, ?, ?)";
-            PreparedStatement insertDiscountStatement = connection.prepareStatement(insertDiscountQuery);
-            insertDiscountStatement.setInt(1, hostelId);
-            insertDiscountStatement.setString(2, code);
-            insertDiscountStatement.setFloat(3, discountAmount);
-            insertDiscountStatement.setDate(4, discountDeadline);
-            insertDiscountStatement.executeUpdate();
-
-            System.out.println("Discount added successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to add discount. Please try again.");
         }
-
-        loadDiscounts();
-        clearForm();
     }
-
+    
     @FXML
-    private void UpdateButton() {
-        Single_Discount selectedDiscount = tableView.getSelectionModel().getSelectedItem();
-
-        if (selectedDiscount == null) {
-            showAlert(Alert.AlertType.ERROR, "Selection Error!", "Please select a discount to update");
-            return;
-        }
-
-        String hostelName = Hostel_Name.getValue();
-        String location = Location.getValue();
-        String room = Rooms.getValue();
-        String newCode = discountcode.getText();
-        String newAmount = Discountamount.getValue();
-        LocalDate newDeadlineDate = deadline.getValue();
-
-        if (hostelName == null || location == null || room == null || newCode.isEmpty() || newAmount == null || newDeadlineDate == null) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Please enter all the fields");
-            return;
-        }
-
-        // Convert new amount and deadline
-        float newDiscountAmount = Float.parseFloat(newAmount.replace("%", "")) / 100; // Convert percentage to a decimal
-        Date newDiscountDeadline = Date.valueOf(newDeadlineDate);
-
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            // Fetch the hostel_id based on hostel name
-            String hostelIdQuery = "SELECT id FROM hostels WHERE name = ?";
-            PreparedStatement hostelIdStatement = connection.prepareStatement(hostelIdQuery);
-            hostelIdStatement.setString(1, hostelName);
-            ResultSet resultSet = hostelIdStatement.executeQuery();
-            int hostelId = 0;
-            if (resultSet.next()) {
-                hostelId = resultSet.getInt("id");
-            }
-
-            // Update the discount in the discounts table
-            String updateDiscountQuery = "UPDATE discounts SET dls_code = ?, amount = ?, deadline = ? WHERE hostel_id = ? AND dls_code = ?";
-            PreparedStatement updateDiscountStatement = connection.prepareStatement(updateDiscountQuery);
-            updateDiscountStatement.setString(1, newCode);
-            updateDiscountStatement.setFloat(2, newDiscountAmount);
-            updateDiscountStatement.setDate(3, newDiscountDeadline);
-            updateDiscountStatement.setInt(4, hostelId);
-            updateDiscountStatement.setString(5, selectedDiscount.getDlsCode());
-            updateDiscountStatement.executeUpdate();
-
-            System.out.println("Discount updated successfully.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        loadDiscounts();
-        clearForm();
+private void UpdateButton() {
+    // Get the selected discount
+    ObservableList<String> selectedDiscount = tableView.getSelectionModel().getSelectedItem();
+    if (selectedDiscount == null) {
+        showAlert(Alert.AlertType.ERROR, "Error", "Please select a discount to update.");
+        return;
     }
 
-    @FXML
-    private void deleteButton() {
-        Single_Discount selectedDiscount = tableView.getSelectionModel().getSelectedItem();
+    // Extract the data from the selected discount
+    String hostelName = selectedDiscount.get(0);
+    String location = selectedDiscount.get(1);
+    String room = selectedDiscount.get(2);
+    String code = selectedDiscount.get(3);
+    String amount = selectedDiscount.get(4);
+    String deadlineDate = selectedDiscount.get(5);
 
-        if (selectedDiscount == null) {
-            showAlert(Alert.AlertType.ERROR, "Selection Error!", "Please select a discount to delete");
-            return;
-        }
+    // Open a dialog to allow the user to modify the discount
+    TextInputDialog dialog = new TextInputDialog();
+    dialog.setTitle("Update Discount");
+    dialog.setHeaderText(null);
+    dialog.setContentText("Enter new discount code:");
 
+    Optional<String> newCodeResult = dialog.showAndWait();
+    if (newCodeResult.isPresent()) {
+        String newCode = newCodeResult.get();
+        tableView.getItems().clear(); 
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            // Fetch the hostel_id based on hostel name
-            String hostelIdQuery = "SELECT id FROM hostels WHERE name = ?";
-            PreparedStatement hostelIdStatement = connection.prepareStatement(hostelIdQuery);
-            hostelIdStatement.setString(1, selectedDiscount.getHostelName());
-            ResultSet resultSet = hostelIdStatement.executeQuery();
-            int hostelId = 0;
-            if (resultSet.next()) {
-                hostelId = resultSet.getInt("id");
+            String updateQuery = "UPDATE discounts SET dls_code = ? WHERE dls_code = ?";
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+                updateStatement.setString(1, newCode);
+                updateStatement.setString(2, code);
+                updateStatement.executeUpdate();
+                loadDiscounts(); // Reload discounts after update
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Discount updated successfully.");
             }
-
-            // Delete the discount from the discounts table
-            String deleteDiscountQuery = "DELETE FROM discounts WHERE hostel_id = ? AND dls_code = ?";
-            PreparedStatement deleteDiscountStatement = connection.prepareStatement(deleteDiscountQuery);
-            deleteDiscountStatement.setInt(1, hostelId);
-            deleteDiscountStatement.setString(2, selectedDiscount.getDlsCode());
-            deleteDiscountStatement.executeUpdate();
-
-            System.out.println("Discount deleted successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to update discount. Please try again.");
         }
-
-        loadDiscounts();
     }
+}
+
+
+@FXML
+private void deleteButton() {
+    // Get the selected discount
+    ObservableList<String> selectedDiscount = tableView.getSelectionModel().getSelectedItem();
+    if (selectedDiscount == null) {
+        showAlert(Alert.AlertType.ERROR, "Error", "Please select a discount to delete.");
+        return;
+    }
+
+    // Extract the data from the selected discount
+    String hostelName = selectedDiscount.get(0);
+    String code = selectedDiscount.get(3);
+
+    // Confirm deletion with the user
+    Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+    confirmationAlert.setTitle("Confirm Deletion");
+    confirmationAlert.setHeaderText(null);
+    confirmationAlert.setContentText("Are you sure you want to delete the discount with code: " + code + "?");
+    
+    Optional<ButtonType> result = confirmationAlert.showAndWait();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+        tableView.getItems().clear(); 
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String deleteQuery = "DELETE FROM discounts WHERE dls_code = ?";
+            try (PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+                deleteStatement.setString(1, code);
+                deleteStatement.executeUpdate();
+                loadDiscounts(); // Reload discounts after deletion
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Discount deleted successfully.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to delete discount. Please try again.");
+        }
+    }
+}
+
 
     @FXML
     private void undoButton() {
-        // Implement undo functionality if needed
+        // Implementation of undoButton method
     }
 
     private void loadDiscounts() {
-        List<Single_Discount> discountList = discounts.getAllDiscounts();
-        tableView.getItems().setAll(discountList);
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            String query = "SELECT d.dls_code, d.amount, d.deadline, h.name AS hostel_name, h.location AS hostel_location, r.name AS room_name " +
+               "FROM discounts d " +
+               "JOIN hostels h ON d.hostel_id = h.id " +
+               "JOIN rooms r ON d.hostel_id = r.id";
+
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String hostelName = resultSet.getString("hostel_name");
+                        String hostelLocation = resultSet.getString("hostel_location");
+                        String roomName = resultSet.getString("room_name");
+                        String discountCode = resultSet.getString("dls_code");
+                        float amount = resultSet.getFloat("amount");
+                        Date deadline = resultSet.getDate("deadline");
+
+                        // Add the fetched data to a row (ObservableList<String>)
+                        ObservableList<String> rowData = FXCollections.observableArrayList(
+                            hostelName,
+                            hostelLocation,
+                            roomName,
+                            discountCode,
+                            String.valueOf(amount),
+                            deadline.toString()
+                        );
+
+                        // Add the row data to the TableView
+                        tableView.getItems().add(rowData);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load discounts from the database.");
+        }
     }
 
     private void clearForm() {
