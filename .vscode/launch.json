@@ -16,7 +16,9 @@
             "type": "java",
             "name": "Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "Users_Package.App",
+            "projectName": "Hostel-Management-System_e6f42505",
+            "vmArgs": "--module-path \"E:/Softwares/Java Fx SDK/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
         },
     ]
 }
