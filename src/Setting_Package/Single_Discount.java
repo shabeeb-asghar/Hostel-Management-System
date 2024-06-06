@@ -1,14 +1,15 @@
 package Setting_Package;
 
+import java.sql.Date;
 import java.sql.Time;
 
 public class Single_Discount {
 
     private String dlsCode;
     private float amount;
-    private Time deadline;
+    private Date deadline;
 
-    public Single_Discount(String dlsCode, float amount, Time deadline) {
+    public Single_Discount(String dlsCode, float amount, Date deadline) {
         this.dlsCode = dlsCode;
         this.amount = amount;
         this.deadline = deadline;
@@ -30,11 +31,11 @@ public class Single_Discount {
         this.amount = amount;
     }
 
-    public Time getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Time deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 

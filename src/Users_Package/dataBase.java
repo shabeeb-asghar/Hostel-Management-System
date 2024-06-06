@@ -20,7 +20,18 @@ public class dataBase {
    
     private static final String USERNAME = "root";
     private static final String PASSWORD = "1234Qwert@";
-
+public String geturl()
+{
+return URL;
+}
+public String getusername()
+{
+    return USERNAME;
+}
+public String getpassword()
+{
+    return PASSWORD;
+}
     // Method to insert hostel data into the database
     public static void insertHostel(Hostel hostel) {
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
@@ -208,6 +219,8 @@ private static void insertMessService(Connection connection, int serviceId, Stri
     statement.executeUpdate();
     System.out.println("Mess service inserted successfully for service: " + serviceId);
 }
+
+
 }
 
 

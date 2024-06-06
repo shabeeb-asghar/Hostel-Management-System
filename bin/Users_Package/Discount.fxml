@@ -43,11 +43,12 @@
             </AnchorPane>
             <TableView fx:id="tableView" editable="true" prefHeight="257.0" prefWidth="575.0">
                <columns>
-                  <TableColumn fx:id="nameCol" prefWidth="119.56277465820312" text="Hostel Name" />
-                  <TableColumn fx:id="locCol" minWidth="0.0" prefWidth="174.43724060058594" text="Location" />
-                  <TableColumn fx:id="numCol" prefWidth="137.70730590820312" text="Contact Number" />
-                  <TableColumn fx:id="roomCol" prefWidth="246.292724609375" text="Room" />
-                  <TableColumn fx:id="discountCol" prefWidth="99.71478271484375" text="Discount" />
+                  <TableColumn fx:id="nameCol" prefWidth="123.79531860351562" text="Hostel Name" />
+                  <TableColumn fx:id="locCol" minWidth="0.0" prefWidth="184.40237426757812" text="Location" />
+                  <TableColumn fx:id="roomCol" prefWidth="83.59768676757812" text="Room" />
+                  <TableColumn fx:id="DiscodeCol" prefWidth="158.80474853515625" text="Code" />
+                  <TableColumn fx:id="discountCol" prefWidth="171.6070556640625" text="Discount" />
+                  <TableColumn fx:id="deadlinecol" prefWidth="93.3929443359375" text="Deadline" />
                </columns>
                <padding>
                   <Insets bottom="10.0" />

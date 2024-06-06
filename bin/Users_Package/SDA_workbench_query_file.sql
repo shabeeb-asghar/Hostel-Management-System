@@ -70,7 +70,7 @@ CREATE TABLE discounts (
     hostel_id INT NOT NULL,
     dls_code VARCHAR(20) NOT NULL,
     amount FLOAT NOT NULL,
-    deadline TIME NOT NULL,
+    deadline Date NOT NULL,
     FOREIGN KEY (hostel_id) REFERENCES hostels(id)
 );
 select * from hostels;

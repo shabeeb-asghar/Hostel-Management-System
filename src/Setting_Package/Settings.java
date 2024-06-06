@@ -1,5 +1,6 @@
 package Setting_Package;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Settings {
         this.feedback.removeFeedback(feedback);
     }
 
-    public void setDiscount(String dlsCode, float amount, Time deadline) {
+    public void setDiscount(String dlsCode, float amount, Date deadline) {
         this.discount.setDiscount(dlsCode, amount, deadline);
     }
 
@@ -37,7 +38,7 @@ public class Settings {
         this.discount.removeDiscount(dlsCode);
     }
 
-    public void updateDiscount(String oldDlsCode, float oldAmount, Time oldDeadline, String newDlsCode, float newAmount, Time newDeadline) {
+    public void updateDiscount(String oldDlsCode, float oldAmount, Date oldDeadline, String newDlsCode, float newAmount, Date newDeadline) {
         this.discount.updateDiscount(oldDlsCode, oldAmount, oldDeadline, newDlsCode, newAmount, newDeadline);
     }
 

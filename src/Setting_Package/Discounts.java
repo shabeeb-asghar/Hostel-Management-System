@@ -1,5 +1,6 @@
 package Setting_Package;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class Discounts {
         this.discounts = new ArrayList<>();
     }
 
-    public void setDiscount(String dlsCode, float amount, Time deadline) {
+    public void setDiscount(String dlsCode, float amount, Date deadline) {
         this.discounts.add(new Single_Discount(dlsCode, amount, deadline));
     }
 
@@ -19,7 +20,7 @@ public class Discounts {
         discounts.removeIf(discount -> discount.getDlsCode().equals(dlsCode));
     }
 
-    public void updateDiscount(String oldDlsCode, float oldAmount, Time oldDeadline, String newDlsCode, float newAmount, Time newDeadline) {
+    public void updateDiscount(String oldDlsCode, float oldAmount, Date oldDeadline, String newDlsCode, float newAmount, Date newDeadline) {
         for (Single_Discount discount : discounts) {
             if (discount.getDlsCode().equals(oldDlsCode) && discount.getAmount() == oldAmount && discount.getDeadline().equals(oldDeadline)) {
                 discount.setDlsCode(newDlsCode);
