@@ -30,7 +30,7 @@ public class Discount_Controller {
   
    
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "shabeeb";
+    private static final String PASSWORD = "1234Qwert@";
    
     @FXML
     private ComboBox<String> Hostel_Name;
@@ -70,7 +70,7 @@ public class Discount_Controller {
     @FXML
     private Button delete;
     @FXML
-    private Button undo;
+    private Button Back;
 
     private Discounts discounts;
 
@@ -120,6 +120,7 @@ public class Discount_Controller {
                 while (roomResultSet.next()) {
                     String roomName = roomResultSet.getString("name");
                     Rooms.getItems().add(roomName);
+                    System.out.println(roomName);
                 }
             }
         } catch (SQLException e) {
@@ -260,8 +261,8 @@ private void deleteButton() {
 
 
     @FXML
-    private void undoButton() {
-        // Implementation of undoButton method
+    private void BackButton() {
+        // Implementation of BackButton method
     }
 
     private void loadDiscounts() {

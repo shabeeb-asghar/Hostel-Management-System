@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="942.0" stylesheets="@Feedback.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Feedback_Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="942.0" stylesheets="@Feedback.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Setting_Package.Feedback_Controller">
    <center>
         <Label styleClass="title" text="Feedback" />
       <SplitPane dividerPositions="0.23633540372670803, 0.7751552795031055" orientation="VERTICAL" style="-fx-background-color: white;" stylesheets="@Feedback.css" BorderPane.alignment="CENTER">
@@ -31,7 +31,6 @@
                   <ComboBox fx:id="Hostel_Name" layoutX="14.0" layoutY="24.0" prefHeight="26.0" prefWidth="230.0" promptText="Choose" visibleRowCount="8" AnchorPane.leftAnchor="14.0" />
                   <Label layoutX="450.0" layoutY="76.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="16.0" text="Rating" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="205.0" />
                   <ComboBox fx:id="Rating" layoutX="436.0" layoutY="102.0" prefHeight="23.0" prefWidth="100.0" promptText="Choose" visibleRowCount="2" />
-                  <Button fx:id="Submit" layoutX="609.0" layoutY="99.0" mnemonicParsing="false" onAction="#submitButton" prefWidth="70.0" text="Submit" />
                   
                </children>
             </AnchorPane>
@@ -60,7 +59,7 @@
                               <Insets bottom="25.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="undo" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#undoButton" prefWidth="70.0" text="Undo" />
+                        <Button id="delete" fx:id="Back" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backButton" prefWidth="70.0" text="Back" />
                      </children>
                   </VBox>
                </children>

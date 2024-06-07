@@ -1,6 +1,7 @@
 package Hostel_Package;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import Setting_Package.Discounts;
 import Setting_Package.Feedback;
@@ -46,7 +47,7 @@ public class Hostel { //controller
        
         
         // Initialize rooms
-        //initializeRooms();
+        initializeRooms();
         // Initialize services
         initializeServices();
         }
@@ -59,36 +60,45 @@ public class Hostel { //controller
         {
             this.rooms.add(r);
         }
-// private String generateRoomName() {
-//     return name + "_Room_" + roomCounter++;
-// }
+private String generateRoomName() {
+     return name + "_Room_" + roomCounter++;
+ }
 
-// private int generateBedID() {
-//     return bedCounter++;
-// }
+ private int generateBedID() {
+     return bedCounter++;
+ }
 
         public List<Room> getRooms() {
             return rooms;
         }
-        // private void initializeRooms() {
+         private void initializeRooms() {
             
-        //     for (int i = 0; i < numberOfOneBedRooms; i++) {
-        //         Room room = new Room();
-        //         room.setName(generateRoomName());
-        //         room.addBed(new SingleSeater(generateBedID()));
-        //         rooms.add(room);
+             for (int i = 0; i < numberOfOneBedRooms; i++) {
+                Random random = new Random();
+
+        // Generate a random number between 20000 and 30000
+        int randomNumber = random.nextInt(10001) + 20000;
+              
+                 Room room = new Room(generateRoomName(),true,5,5, randomNumber,i+1);
+                 
+                 room.addBed(new SingleSeater(generateBedID()));
+                 rooms.add(room);
                
-        //     }
-        //     for (int i = 0; i < numberOfTwoBedRooms; i++) {
-        //         Room room = new Room();
-        // room.setName(generateRoomName());
-        // room.addBed(new DoubleSeater(generateBedID()));
-        // room.addBed(new DoubleSeater(generateBedID())); // Assuming two beds in each two-bed room
-        // rooms.add(room);
+             }
+             for (int i = 0; i < numberOfTwoBedRooms; i++) {
+                Random random = new Random();
+
+                // Generate a random number between 20000 and 30000
+                int randomNumber = random.nextInt(10001) + 20000;
+                Room room = new Room(generateRoomName(),true,5,5, randomNumber,i+1);
+                 
+         room.addBed(new DoubleSeater(generateBedID()));
+         room.addBed(new DoubleSeater(generateBedID())); // Assuming two beds in each two-bed room
+         rooms.add(room);
                 
-        //     }
+             }
             
-        // }
+         }
 
 
         private void initializeServices() {

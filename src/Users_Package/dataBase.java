@@ -19,7 +19,7 @@ public class dataBase {
  private static final String URL = "jdbc:mysql://localhost:3306/sda_project_final_db";
    
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "shabeeb";
+    private static final String PASSWORD = "1234Qwert@";
 public String geturl()
 {
 return URL;
@@ -160,6 +160,7 @@ public List<Hostel> fetchHostelData() {
                 hostelId = generatedKeys.getInt(1);
                 // Set the generated hostel ID to the hostel object
                 hostel.setId(hostelId);
+                System.out.println(hostel.getRooms());
                 insertRoom(connection, hostelId, hostel.getRooms());
                 insertServicesForHostel( connection,  hostelId,  hostel);
             }
@@ -171,17 +172,13 @@ public List<Hostel> fetchHostelData() {
     }
     private static void insertRoom(Connection connection, int hostelId, List<Room> rooms) {
         try {
-            // Prepare SQL statement for inserting room data
-            String roomSql = "INSERT INTO rooms (hostel_id, name, availability) VALUES (?, ?, ?,?,?,?,?)";
+            String roomSql = "INSERT INTO rooms (hostel_id, name, availability, no_guests, capacity, price, room_no) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement roomStatement = connection.prepareStatement(roomSql, Statement.RETURN_GENERATED_KEYS);
             
-            // Prepare SQL statement for inserting bed data
             String bedSql = "INSERT INTO beds (room_id, available) VALUES (?, ?)";
             PreparedStatement bedStatement = connection.prepareStatement(bedSql);
             
-            // Insert each room associated with the hostel
             for (Room room : rooms) {
-                // Set values for parameters in the room prepared statement
                 roomStatement.setInt(1, hostelId);
                 roomStatement.setString(2, room.getName());
                 roomStatement.setBoolean(3, room.isAvailable());
@@ -189,19 +186,13 @@ public List<Hostel> fetchHostelData() {
                 roomStatement.setInt(5, room.getCapacity());
                 roomStatement.setDouble(6, room.getRoomPrice());
                 roomStatement.setInt(7, room.getRoomNo());
-
-                
-                // Execute the SQL statement to insert room data
+    
                 int roomRowsInserted = roomStatement.executeUpdate();
                 if (roomRowsInserted > 0) {
                     System.out.println("Room inserted successfully for hostel: " + hostelId);
-                    
-                    // Retrieve the generated room ID
                     ResultSet roomGeneratedKeys = roomStatement.getGeneratedKeys();
                     if (roomGeneratedKeys.next()) {
                         int roomId = roomGeneratedKeys.getInt(1);
-                        
-                        // Insert beds for the room
                         insertBeds(connection, roomId, room.getbeds());
                     }
                 } else {
@@ -212,60 +203,62 @@ public List<Hostel> fetchHostelData() {
             System.err.println("Error inserting rooms: " + e.getMessage());
         }
     }
+    
     private static void insertBeds(Connection connection, int roomId, List<Bed> beds) {
-    try {
-        // Prepare SQL statement for inserting bed data
-        String bedSql = "INSERT INTO beds (room_id, available) VALUES (?, ?)";
-        PreparedStatement bedStatement = connection.prepareStatement(bedSql, Statement.RETURN_GENERATED_KEYS);
-        
-        // Insert each bed associated with the room
-        for (Bed bed : beds) {
-            // Set values for parameters in the prepared statement
-            bedStatement.setInt(1, roomId);
-            bedStatement.setBoolean(2, bed.isAvailable());
+        try {
+            String bedSql = "INSERT INTO beds (room_id, available) VALUES (?, ?)";
+            PreparedStatement bedStatement = connection.prepareStatement(bedSql, Statement.RETURN_GENERATED_KEYS);
             
-            // Execute the SQL statement to insert bed data
-            int rowsInserted = bedStatement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Bed inserted successfully for room: " + roomId);
+            for (Bed bed : beds) {
+                bedStatement.setInt(1, roomId);
+                bedStatement.setBoolean(2, bed.isAvailable());
                 
-                // Retrieve the generated bed ID
-                ResultSet generatedKeys = bedStatement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    int bedId = generatedKeys.getInt(1);
-                    
-                    // Insert the bed ID into the appropriate bed table
-                    if (bed instanceof SingleSeater) {
-                        insertSingleSeaterBedId(connection, bedId);
-                    } else if (bed instanceof DoubleSeater) {
-                        insertDoubleSeaterBedId(connection, bedId);
-                    } else {
-                        System.out.println("Unsupported bed type: " + bed.getClass().getSimpleName());
+                int rowsInserted = bedStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Bed inserted successfully for room: " + roomId);
+                    ResultSet generatedKeys = bedStatement.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        int bedId = generatedKeys.getInt(1);
+                        if (bed instanceof SingleSeater) {
+                            insertSingleSeaterBedId(connection, bedId);
+                        } else if (bed instanceof DoubleSeater) {
+                            insertDoubleSeaterBedId(connection, bedId);
+                        } else {
+                            System.out.println("Unsupported bed type: " + bed.getClass().getSimpleName());
+                        }
                     }
+                } else {
+                    System.out.println("Failed to insert bed for room: " + roomId);
                 }
-            } else {
-                System.out.println("Failed to insert bed for room: " + roomId);
             }
+        } catch (SQLException e) {
+            System.err.println("Error inserting beds: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.err.println("Error inserting beds: " + e.getMessage());
     }
-}
-
-private static void insertSingleSeaterBedId(Connection connection, int bedId) throws SQLException {
-    String sql = "INSERT INTO single_seater_beds (bed_id) VALUES (?)";
-    PreparedStatement statement = connection.prepareStatement(sql);
-    statement.setInt(1, bedId);
-    statement.executeUpdate();
-}
-
-private static void insertDoubleSeaterBedId(Connection connection, int bedId) throws SQLException {
-    String sql = "INSERT INTO double_seater_beds (bed_id) VALUES (?)";
-    PreparedStatement statement = connection.prepareStatement(sql);
-    statement.setInt(1, bedId);
-    statement.executeUpdate();
-}
-
+    
+    private static void insertSingleSeaterBedId(Connection connection, int bedId) {
+        try {
+            String sql = "INSERT INTO single_seater_beds (bed_id) VALUES (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, bedId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error inserting single seater bed ID: " + e.getMessage());
+        }
+    }
+    
+    private static void insertDoubleSeaterBedId(Connection connection, int bedId) {
+        try {
+            String sql = "INSERT INTO double_seater_beds (bed_id) VALUES (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, bedId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error inserting double seater bed ID: " + e.getMessage());
+        }
+    }
+        
+   
 private static void insertServicesForHostel(Connection connection, int hostelId, Hostel hostel) {
     try {
         // Insert data into the Service table

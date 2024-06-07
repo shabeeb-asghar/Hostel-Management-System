@@ -49,8 +49,11 @@ public class Landing_Page_Controller {
     {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-        
-          stage.setScene(App.getScene2());
+       // stage.setScene(App.getScene_Discount());
+        //stage.setScene(App.getScene_register_hostel());
+      // stage.setScene(App.getpayment());
+      stage.setScene(App.getScene_feedback());
+         // stage.setScene(App.getScene2());
         
     }
     public void Pressed_Guest_Button(ActionEvent event)

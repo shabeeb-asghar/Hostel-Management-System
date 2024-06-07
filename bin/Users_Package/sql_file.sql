@@ -83,7 +83,8 @@ drop table hostels;
 CREATE TABLE feedbacks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     hostel_id INT NOT NULL,
-    message TEXT NOT NULL,
+    Description TEXT NOT NULL,
+    Rating int not null,
     FOREIGN KEY (hostel_id) REFERENCES hostels(id)
 );
 

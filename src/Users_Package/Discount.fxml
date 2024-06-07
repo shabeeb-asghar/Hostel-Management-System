@@ -67,7 +67,7 @@
                               <Insets bottom="25.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="undo" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#undoButton" prefWidth="70.0" text="Undo" />
+                        <Button fx:id="Back" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#BackButton" prefWidth="70.0" text="Back" />
                      </children>
                   </VBox>
                </children>

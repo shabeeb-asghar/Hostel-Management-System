@@ -12,6 +12,7 @@ public class Room {
     private int capacity;
 private List<Bed> beds;
     private boolean availability;
+   
     public Room(String name, boolean availability, int noGuests, int capacity, double price, int roomNo) {
         this.name = name;
         this.availability = availability;
