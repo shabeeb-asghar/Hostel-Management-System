@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import Setting_Package.Discounts;
-import Setting_Package.Feedback;
+import Users_Package.Feedback;
 
 public class Hostel { //controller
     

@@ -10,16 +10,16 @@
             "request": "launch",
             "mainClass": "Users_Package.App",
             "projectName": "Hostel-Management-System_24d70a65",
-            "vmArgs": "--module-path \"D:/softwares/openjfx-22.0.1_windows-x64_bin-sdk (1)/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
-        
-        },
-       
-        {
-            "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "Users_Package.App",
-            "projectName": "Hostel-Management-System_e6f42505",
-           }
+            
+            },
+            
+            {
+                "type": "java",
+                "name": "Current File",
+                "request": "launch",
+                "mainClass": "Users_Package.App",
+                "projectName": "Hostel-Management-System_e6f42505",
+            "vmArgs": "--module-path \"E:/Softwares/Java Fx SDK/javafx-sdk-21.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
+                }
     ]
 }

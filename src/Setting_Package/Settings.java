@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
+import Users_Package.Feedback;
+
 public class Settings {
 //private GuestPolicy policy;
     //private Notification notification;

@@ -170,14 +170,11 @@
                               <Insets left="1.0" />
                            </HBox.margin>
                         </Text>
-                        <Hyperlink id="HyperLink" fx:id="SignUp_Link" text="Sign Up">
-                           <HBox.margin>
-                              <Insets left="4.0" top="-7.0" />
-                           </HBox.margin>
+                        <Button fx:id="SignUp_Link" mnemonicParsing="false" onAction="#onSignUpLinkClick" text="SignUp">
                            <font>
-                              <Font name="BrandonText-Bold" size="10.0" />
+                              <Font size="6.0" />
                            </font>
-                        </Hyperlink>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets left="99.0" top="64.0" />
@@ -190,7 +187,7 @@
                <children>
                   <ImageView fitHeight="425.0" fitWidth="318.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../Assets/matese-fields-pvHma684eEI-unsplash.jpg" />
+                        <Image url="@../../Assets/matese-fields-pvHma684eEI-unsplash.jpg" />
                      </image>
                   </ImageView>
                   <Rectangle fill="#c3b6b6" height="425.0" opacity="0.89" stroke="TRANSPARENT" strokeType="INSIDE" width="318.0" />

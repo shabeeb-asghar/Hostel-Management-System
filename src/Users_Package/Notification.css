@@ -1,0 +1,34 @@
+.root {
+    -fx-background-color: #f7d7d5;
+    
+}
+.header {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+VBox {
+    -fx-padding: 10;
+}
+
+Button {
+    -fx-background-color: #232323;
+    -fx-text-fill: white;
+    -fx-pref-height: 30;
+    -fx-font-size: 14px;
+}
+
+TextArea {
+    -fx-pref-height: 40;
+}
+
+ToggleButton {
+    -fx-background-color: #232323;
+    -fx-text-fill: white;
+    -fx-pref-height: 30;
+    -fx-font-size: 14px;
+}
+
+ComboBox {
+    -fx-pref-width: 150;
+}

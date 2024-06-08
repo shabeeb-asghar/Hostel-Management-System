@@ -1,4 +1,4 @@
-package Setting_Package;
+package Users_Package;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -21,11 +22,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 public class Feedback_Controller {
 private static final String URL = "jdbc:mysql://localhost:3306/sda_project_final_db";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234Qwert@";
+    private static final String PASSWORD = "shabeeb";
 
     @FXML
     private ComboBox<String> Hostel_Name;
@@ -157,10 +159,11 @@ private void addButton() {
 
         Optional<ButtonType> result = confirmationAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            tableView.getItems().clear();
             try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-                String deleteQuery = "DELETE FROM feedbacks WHERE hostel_name = ? AND location = ?";
-                try (PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+                String deleteQuery = 
+                "DELETE feedbacks FROM feedbacks " +
+                "JOIN hostels ON feedbacks.hostel_id = hostels.id " +
+                "WHERE hostels.name = ? AND hostels.location = ?";                try (PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
                     deleteStatement.setString(1, hostelName);
                     deleteStatement.setString(2, location);
                     deleteStatement.executeUpdate();
@@ -175,8 +178,11 @@ private void addButton() {
     }
 
     @FXML
-    private void backButton() {
-        // Implementation of backButton method
+    public void backButton(ActionEvent event) {
+        Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+    
+             stage.setScene(App.getHome());
     }
 
     private void loadFeedbacks() {

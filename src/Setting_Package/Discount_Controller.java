@@ -2,13 +2,17 @@ package Setting_Package;
 
 import Setting_Package.Discounts;
 import Setting_Package.Single_Discount;
+import Users_Package.App;
 import Users_Package.dataBase;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -22,6 +26,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.Action;
+
 import Hostel_Package.Hostel;
 import Hostel_Package.Room;
 
@@ -30,7 +36,7 @@ public class Discount_Controller {
   
    
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234Qwert@";
+    private static final String PASSWORD = "shabeeb";
    
     @FXML
     private ComboBox<String> Hostel_Name;
@@ -70,7 +76,7 @@ public class Discount_Controller {
     @FXML
     private Button delete;
     @FXML
-    private Button Back;
+    private Button Home;
 
     private Discounts discounts;
 
@@ -261,8 +267,11 @@ private void deleteButton() {
 
 
     @FXML
-    private void BackButton() {
-        // Implementation of BackButton method
+    public void onClickHome(ActionEvent event) {
+                    Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+    
+             stage.setScene(App.getHome());
     }
 
     private void loadDiscounts() {

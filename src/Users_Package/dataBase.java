@@ -19,7 +19,7 @@ public class dataBase {
  private static final String URL = "jdbc:mysql://localhost:3306/sda_project_final_db";
    
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234Qwert@";
+    private static final String PASSWORD = "shabeeb";
 public String geturl()
 {
 return URL;
@@ -33,8 +33,161 @@ public String getpassword()
     return PASSWORD;
 }
 
+public boolean isStudentRegistered(String email) {
+    String query = "SELECT COUNT(*) FROM Students WHERE email = ?";
+
+    try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+        preparedStatement.setString(1, email);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            int count = resultSet.getInt(1);
+            return count > 0; // Return true if count > 0, indicating the student is registered
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return false; // Return false if an error occurred or no records were found
+}
+// Method to insert hostel data into the database
+public static void insertStudent(Student s) {
+    try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        // Prepare SQL statement for inserting hostel data
+        String sql = "INSERT INTO Students (name,email, password,contact_number, " +
+                     " cnic) " +
+                     "VALUES (?,?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        
+        // Set values for parameters in the prepared statement
+        statement.setString(1, s.getName());
+        statement.setString(2, s.getEmail());
+        statement.setString(3, s.getPassword());
+        statement.setString(4, s.getContact());
+        statement.setString(5, s.getCNIC());
+        
+        // Execute the SQL statement to insert data
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+            System.out.println("Student inserted successfully.");
+              ResultSet generatedKeys = statement.getGeneratedKeys();
+          
+        }
+    } catch (SQLException e) {
+        System.err.println("Error inserting Student: " + e.getMessage());
+    }
+}
+public List<Hostel> fetchHostelSearch(String searchText) {
+    List<Hostel> hostels = new ArrayList<>();
+    String query = "SELECT id, name, password, location, contact_number, number_of_one_bed_rooms, number_of_two_bed_rooms, laundry_service, mess_service FROM hostels WHERE name LIKE ?";
+    String roomQuery = "SELECT id, name, availability, no_guests, capacity, price, room_no FROM rooms WHERE hostel_id = ?";
+    String bedQuery = "SELECT id, available FROM beds WHERE room_id = ?";
+
+    try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+         PreparedStatement pstmt = conn.prepareStatement(query);
+         PreparedStatement roomStmt = conn.prepareStatement(roomQuery);
+         PreparedStatement bedStmt = conn.prepareStatement(bedQuery)) {
+
+        // Set search criteria
+        pstmt.setString(1, "%" + searchText + "%");
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            String password = rs.getString("password");
+            String location = rs.getString("location");
+            String contactNumber = rs.getString("contact_number");
+            int numberOfOneBedRooms = rs.getInt("number_of_one_bed_rooms");
+            int numberOfTwoBedRooms = rs.getInt("number_of_two_bed_rooms");
+            boolean laundryService = rs.getBoolean("laundry_service");
+            boolean messService = rs.getBoolean("mess_service");
+
+            Hostel hostel = new Hostel(name, password, location, contactNumber, numberOfOneBedRooms, numberOfTwoBedRooms, laundryService, messService);
+            hostel.setId(id);
+            roomStmt.setInt(1, id);
+
+            try (ResultSet roomRs = roomStmt.executeQuery()) {
+                while (roomRs.next()) {
+                    int roomId = roomRs.getInt("id");
+                    String roomName = roomRs.getString("name");
+                    boolean availability = roomRs.getBoolean("availability");
+                    int noGuests = roomRs.getInt("no_guests");
+                    int capacity = roomRs.getInt("capacity");
+                    double price = roomRs.getDouble("price");
+                    int roomNo = roomRs.getInt("room_no");
+
+                    Room room = new Room(roomName, availability, noGuests, capacity, price, roomNo);
+
+                    // Fetch beds for the room
+                    bedStmt.setInt(1, roomId);
+                    try (ResultSet bedRs = bedStmt.executeQuery()) {
+                        while (bedRs.next()) {
+                            int bedId = bedRs.getInt("id");
+                            boolean bedAvailable = bedRs.getBoolean("available");
+
+                            Bed bed = new Bed(bedId,bedAvailable);
+                            room.addBed(bed);
+                        }
+                    }
+
+                    hostel.addRoom(room);
+                }
+            }
+
+            hostels.add(hostel);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return hostels;
+}
+// customize Profile
+public void insertStudentProfile(String name ,String email, String password, String contactNumber, String cnic) {
+    try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        String query = "INSERT INTO Students (name,email, password, contact_number, CNIC) VALUES (?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, name);
+        statement.setString(2, email);
+        statement.setString(3, password);
+        statement.setString(4, contactNumber);
+        statement.setString(5, cnic);
+
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+            System.out.println("Student profile inserted successfully.");
+        } else {
+            System.out.println("Failed to insert student profile.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
 public boolean validateLogintudents(String email, String password) {
     String query = "SELECT * FROM Students WHERE email = ? AND password = ?";
+    
+    try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+         
+        pstmt.setString(1, email);
+        pstmt.setString(2, password);
+        
+        ResultSet resultSet = pstmt.executeQuery();
+        
+        return resultSet.next(); // Return true if a record is found, false otherwise
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
+public boolean validateLoginHostel(String email, String password) {
+    String query = "SELECT * FROM hostels WHERE name = ? AND password = ?";
     
     try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
          PreparedStatement pstmt = conn.prepareStatement(query)) {

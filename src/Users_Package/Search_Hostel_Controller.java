@@ -12,12 +12,14 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class Search_Hostel_Controller implements Initializable {
 
@@ -62,6 +64,7 @@ public class Search_Hostel_Controller implements Initializable {
     private HBox Hostel_Item = new HBox();
 
     private List<Hostel> hostels;
+    private List<Hostel_Item_Controller> hostelItemControllers;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dataBase db = new dataBase();
@@ -80,5 +83,39 @@ public class Search_Hostel_Controller implements Initializable {
         e.printStackTrace();
         }
             }
+    }
+    @FXML
+    private void searchHostels(ActionEvent event) {
+        String searchText = Search_Field.getText().trim().toLowerCase();
+
+        // Clear the current list of hostels
+        Hostel_List.getChildren().clear();
+
+        // Fetch hostels based on search criteria
+        dataBase db = new dataBase();
+        List<Hostel> filteredHostels = db.fetchHostelSearch(searchText);
+
+        // Add the filtered hostels to the UI
+        for (Hostel h : filteredHostels) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Hostel_Item.fxml"));
+            try {
+                HBox hostelItem = fxmlLoader.load();
+                Hostel_Item_Controller hi = fxmlLoader.getController();
+                hi.setData(h);
+                Hostel_List.getChildren().add(hostelItem);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    @FXML
+    void onClickHome(ActionEvent event) {
+        
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+             stage.setScene(App.getHome());
+
     }
 }

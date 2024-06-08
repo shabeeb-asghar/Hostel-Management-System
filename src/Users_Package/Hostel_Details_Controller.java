@@ -6,15 +6,18 @@ import java.util.ResourceBundle;
 
 import Hostel_Package.Hostel;
 import Hostel_Package.Room;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Hostel_Details_Controller implements Initializable {
 
@@ -78,6 +81,14 @@ catch (Exception e) {
     }
 }
         
+    @FXML
+    void onClickHome(ActionEvent event) {
+        
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+             stage.setScene(App.getHome());
+
+    }
         @Override
     public void initialize(URL location, ResourceBundle resources) {
 }

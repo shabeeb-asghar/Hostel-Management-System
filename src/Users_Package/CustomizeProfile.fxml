@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@CustomizeProfile.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="Users_Package.CustomizeProfileController">
+    <left>
+        <VBox prefHeight="200.0" spacing="10" styleClass="sidebar"> 
+            <children>
+                <Label styleClass="sidebar-title" text="HOSTEL" />
+                <Button fx:id="HomeButton" onAction="#onClickHome" styleClass="sidebar-button" text="Home" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="50" styleClass="root">
+            <children>
+                <Label styleClass="title" text="Customize Profile" />
+                <Label styleClass="subtitle" text="Let's Know about yourself" />
+                <Label styleClass="subtitle" text="Name:" />
+                <TextField fx:id="nameField" promptText="Name" />
+                <Label styleClass="subtitle" text="Contact Number" />
+                <TextField fx:id="contactNumberField" promptText="Contact Number" />
+                <Label styleClass="subtitle" text="Father Name" />
+                <TextField fx:id="fatherNameField" promptText="Father's Name" />
+                <Label styleClass="subtitle" text="CNIC" />
+                <TextField fx:id="cnicField" promptText="CNIC" />
+                <Label styleClass="subtitle" text="Email Address" />
+                <TextField fx:id="emailField" promptText="Email Address" />
+                
+                <HBox spacing="50">
+                    <children>
+                        <Label styleClass="subtitle" text="Gender" />
+                        <RadioButton fx:id="maleRadioButton" text="Male" />
+                        <RadioButton fx:id="femaleRadioButton" text="Female" />
+                    </children>
+                </HBox>
+                
+                <Label styleClass="section-title" text="Course" />
+                <ComboBox fx:id="courseComboBox" prefWidth="200.0" />
+                
+                <Label styleClass="section-title" text="Date of Birth" />
+                <DatePicker fx:id="datePicker" />
+                
+                <HBox spacing="30">
+                    <children>
+                        <Button onAction="#handleCancelButtonAction" styleClass="button" text="Cancel" />
+                        <Button onAction="#handleSaveButtonAction" styleClass="button" text="Save" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

@@ -14,7 +14,7 @@
       <ScrollPane fx:id="Image_Area" layoutX="165.0" prefHeight="145.0" prefWidth="471.0" />
       <Pane fx:id="Side_Bar" layoutX="-1.0" prefHeight="425.0" prefWidth="166.0">
          <children>
-            <Button fx:id="Home_Button" layoutY="58.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Home" />
+            <Button fx:id="Home_Button" layoutY="58.0" mnemonicParsing="false" onAction="#onClickHome" prefHeight="25.0" prefWidth="166.0" text="Home" />
             <Button fx:id="Book_Hostel_Button" layoutY="83.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Book Hostel" />
             <Button fx:id="Search_Hostel_Button" layoutX="-1.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Search Hostel" />
             <Button fx:id="Notifcation_Button" layoutY="133.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="166.0" text="Notfications" />
@@ -41,7 +41,7 @@
                   <Insets left="3.0" />
                </VBox.margin>
             </Text>
-            <ScrollPane  prefHeight="235.0" prefWidth="471.0">
+            <ScrollPane prefHeight="235.0" prefWidth="471.0">
                <content>
                   <VBox fx:id="Room_Area" prefHeight="227.0" prefWidth="468.0" />
                </content></ScrollPane>

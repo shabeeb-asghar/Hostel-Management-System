@@ -18,7 +18,7 @@
                <children>
                   <ImageView fitHeight="425.0" fitWidth="313.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../Assets/nick-kimel-GrLnSHJT1fI-unsplash.jpg" />
+                        <Image url="@../../Assets/nick-kimel-GrLnSHJT1fI-unsplash.jpg" />
                      </image>
                   </ImageView>
                   <Rectangle fill="#232323" height="425.0" opacity="0.87" stroke="TRANSPARENT" strokeType="INSIDE" width="318.0" />
@@ -39,7 +39,7 @@
                <children>
                   <ImageView fitHeight="425.0" fitWidth="318.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../Assets/matese-fields-pvHma684eEI-unsplash.jpg" />
+                        <Image url="@../../Assets/matese-fields-pvHma684eEI-unsplash.jpg" />
                      </image>
                   </ImageView>
                   <Rectangle fill="#c3b6b6" height="425.0" opacity="0.89" stroke="TRANSPARENT" strokeType="INSIDE" width="318.0" />

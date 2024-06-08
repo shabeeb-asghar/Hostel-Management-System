@@ -77,8 +77,6 @@ CREATE TABLE discounts (
     deadline Date NOT NULL,
     FOREIGN KEY (hostel_id) REFERENCES hostels(id)
 );
-select * from hostels;
-drop table hostels;
 
 CREATE TABLE feedbacks (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -111,7 +109,9 @@ CREATE TABLE Bank (
     id INT PRIMARY KEY,
     FOREIGN KEY (id) REFERENCES Payment(id)
 );
+
 CREATE TABLE Students(
+id int primary key auto_increment,
  email VARCHAR(100) NOT NULL,
  password VARCHAR(100) NOT NULL, 
   contact_number VARCHAR(20) NOT NULL,
@@ -169,3 +169,7 @@ VALUES
     (5, 'Room L', 0, 0, 1, 35.00, 502);
 
 
+INSERT INTO Students (email, password, contact_number, CNIC)
+VALUES
+    ('student1@example.com', 'password1', '1234567890', '12345-6789012-3'),
+    ('student2@example.com', 'password2', '9876543210', '98765-4321098-7');

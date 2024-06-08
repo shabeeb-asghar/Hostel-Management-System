@@ -15,7 +15,7 @@
          <children>
             <Pane fx:id="Side_Bar" prefHeight="400.0" prefWidth="155.0">
                <children>
-                  <Button fx:id="Home_Button" layoutY="58.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Home" />
+                  <Button fx:id="Home_Button" layoutY="58.0" mnemonicParsing="false" onAction="#onClickHome" prefHeight="25.0" prefWidth="143.0" text="Home" />
                   <Button fx:id="Book_Hostel_Button" layoutY="83.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Book Hostel" />
                   <Button fx:id="Search_Hostel_Button" layoutX="-1.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Search Hostel" />
                   <Button fx:id="Notifcation_Button" layoutY="133.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="143.0" text="Notfications" />

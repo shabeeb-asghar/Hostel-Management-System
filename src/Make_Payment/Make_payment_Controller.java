@@ -19,7 +19,7 @@ import javafx.scene.control.ComboBox;
 public class Make_payment_Controller {
     private static final String URL = "jdbc:mysql://localhost:3306/sda_project_final_db";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234Qwert@";
+    private static final String PASSWORD = "shabeeb";
 
     @FXML
     private ComboBox<String> Type; // Updated to match the id in FXML
@@ -109,7 +109,7 @@ public class Make_payment_Controller {
     throws SQLException {
 System.out.print("cash");
 
-String paymentQuery = "INSERT INTO Payment (type, challan, accNo, price, student_id, booking_id, hostel_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+String paymentQuery = "INSERT INTO Payment (type, challan, accNo, student_id, booking_id, hostel_id) VALUES (?, ?, ?, ?, ?, ?)";
 String cashQuery = "INSERT INTO Cash (id) VALUES (LAST_INSERT_ID())";
 
 try (PreparedStatement paymentStatement = conn.prepareStatement(paymentQuery);
@@ -118,7 +118,6 @@ try (PreparedStatement paymentStatement = conn.prepareStatement(paymentQuery);
     paymentStatement.setString(1, "cash");
     paymentStatement.setString(2, challanNumber);
     paymentStatement.setString(3, accountNumber);
-    paymentStatement.setFloat(4, price);
     paymentStatement.setInt(5, 1); // Assuming studentId is provided
     paymentStatement.setInt(6, 1); // Assuming bookingId is provided
     paymentStatement.setInt(7, 1); // Assuming hostelId is provided

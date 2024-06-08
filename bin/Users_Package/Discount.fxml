@@ -67,7 +67,6 @@
                               <Insets bottom="25.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="Back" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#BackButton" prefWidth="70.0" text="Back" />
                      </children>
                   </VBox>
                </children>
@@ -92,9 +91,13 @@
       </VBox>
    </left>
    <top>
-      <HBox id="hbox" alignment="CENTER" prefHeight="62.0" prefWidth="792.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
+      <HBox id="hbox" alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="792.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="title" text="Discount" />
+            <Button id="delete" fx:id="Home" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onClickHome" prefWidth="70.0" text="Home" />
+            <Label styleClass="title" text="Discount">
+               <HBox.margin>
+                  <Insets left="400.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
    </top>

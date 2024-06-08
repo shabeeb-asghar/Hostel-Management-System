@@ -7,10 +7,12 @@ import Hostel_Package.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Room_Item_Controller implements Initializable {
     @FXML
@@ -40,6 +42,10 @@ public class Room_Item_Controller implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Room booked successfully!");
         alert.showAndWait();
+         Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+
+         stage.setScene(App.getpayment());
 
     }
 

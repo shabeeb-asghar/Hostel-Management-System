@@ -1,5 +1,7 @@
 package Users_Package;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -8,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class Login_Page_Guest_Controller {
 
@@ -36,16 +39,24 @@ public class Login_Page_Guest_Controller {
     private CheckBox Remeber_Me;
 
     @FXML
-    private Hyperlink SignUp_Link;
+    private Button SignUp_Link;
 
     private dataBase databaseHandler = new dataBase();
 
     @FXML
     void initialize() {
-        Login_Button.setOnAction(event -> handleLogin());
-    }
+        
+        Login_Button.setOnAction(event -> handleLogin(event));
 
-    private void handleLogin() {
+    }
+        @FXML
+        private void onSignUpLinkClick(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+
+         stage.setScene(App.getScene_register_student());
+    }
+    private void handleLogin(ActionEvent event) {
         String email = Email_Text_Field.getText();
         String password = Password_TextField.getText();
 
@@ -53,6 +64,10 @@ public class Login_Page_Guest_Controller {
 
         if (isValid) {
             showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome!");
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+    
+             stage.setScene(App.getHome());
         } else {
             showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
         }

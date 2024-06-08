@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane stylesheets="@Notification.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Users_Package.NotificationController">
+    <top>
+        <Label styleClass="header" text="Set Notification">
+         <BorderPane.margin>
+            <Insets left="10.0" />
+         </BorderPane.margin></Label>
+    </top>
+    
+    <center>
+        <VBox spacing="10" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <TextArea fx:id="statusMessage" prefRowCount="1" promptText="Choose a room" />
+            
+            <Label text="Suggestions" />
+            <VBox fx:id="suggestionsBox" spacing="5">
+                <Button maxWidth="Infinity" text="Room1" />
+                <Button maxWidth="Infinity" text="Room2" />
+                <Button maxWidth="Infinity" text="Room3" />
+                <Button maxWidth="Infinity" text="Room4" />
+            </VBox>
+        </VBox>
+    </center>
+    
+    <bottom>
+        <VBox spacing="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ToggleButton fx:id="busyToggle" text="Any Room" />
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Clear Notification" />
+                <ComboBox fx:id="clearStatus" />
+            </HBox>
+            
+            <HBox spacing="10">
+                <Button fx:id="setStatusButton" maxWidth="Infinity" onAction="#handleSetStatus" text="Set Notification" />
+                <Button fx:id="clearStatusButton" maxWidth="Infinity" text="Clear Notification" />
+            <Button fx:id="HomeButton" maxWidth="Infinity" onAction="#onClickHome" text="Home" />
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

@@ -21,7 +21,7 @@
          <children>
             <ImageView fitHeight="467.0" fitWidth="300.0" pickOnBounds="true">
                <image>
-                  <Image url="@../Assets/nick-kimel-GrLnSHJT1fI-unsplash.jpg" />
+                  <Image url="@../../Assets/nick-kimel-GrLnSHJT1fI-unsplash.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
@@ -31,7 +31,7 @@
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: pink;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f7d7d5;" BorderPane.alignment="CENTER">
          <children>
             <Text id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Register Hostel" wrappingWidth="183.90538787841797">
                <font>
@@ -72,6 +72,12 @@
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="6.0" />
                </VBox.margin>
+               <font>
+                  <Font size="8.0" />
+               </font>
+               <padding>
+                  <Insets bottom="7.0" left="9.0" top="7.0" />
+               </padding>
             </PasswordField>
             <Text id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" wrappingWidth="45.23874092102051">
                <font>
